@@ -75,8 +75,8 @@ echo '############################## Install Nvidia Driver #####################
 echo '############################## set up tmux ##############################'
 read -p "tmux?"
 mkdir -p ~/dev
-git clone $GITHUB_BASE_URL/configs.git ~/dev/configs
-cp ~/dev/configs/.tmux.conf ~/
+git clone $GITHUB_BASE_URL/dotfiles.git ~/dev/dotfiles
+cp ~/dev/dotfiles/.tmux.conf ~/
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/.config/tmux/plugins/catppuccin
 git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
