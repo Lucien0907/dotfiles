@@ -70,16 +70,20 @@ inner.horizontal = 13
 inner.vertical = 13
 outer.left = 13
 outer.right = 13
-outer.top = [{ monitor.'built-in' = 47 }, { monitor."secondary" = 47 }, 47]
+outer.top = [{ monitor.'built-in' = 10 }, { monitor."dell" = 47 }, 47]
 outer.bottom = 13
 
 [workspace-to-monitor-force-assignment]
-1 = 'built-in' # Monitor sequence number from left to right. 1-based indexing
-2 = 'built-in' # Main monitor
-3 = 'built-in' # Non-main monitor in case when there are only two monitors
-4 = 'built-in' # Case insensitive regex substring
-5 = 'built-in' # Case insensitive regex match
-0 = 'dell'     # Case insensitive regex match
+1 = 'main'                 # Monitor sequence number from left to right. 1-based indexing
+2 = 'main'                 # Main monitor
+3 = 'main'                 # Non-main monitor in case when there are only two monitors
+4 = 'main'                 # Case insensitive regex substring
+5 = 'main'                 # Case insensitive regex match
+6 = ['secondary', 'main']  # Case insensitive regex match
+7 = ['secondary', 'main']  # Case insensitive regex match
+8 = ['secondary', 'main']  # Case insensitive regex match
+9 = ['secondary', 'main']  # Case insensitive regex match
+10 = ['secondary', 'main'] # Case insensitive regex match
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -106,7 +110,7 @@ outer.bottom = 13
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut
 # (like in i3)
-cmd-shift-t = '''exec-and-forget osascript -e '
+cmd-enter = '''exec-and-forget osascript -e '
 tell application "Ghostty"
     if it is running then
         activate
@@ -175,14 +179,23 @@ cmd-2 = 'workspace 2 --auto-back-and-forth'
 cmd-3 = 'workspace 3 --auto-back-and-forth'
 cmd-4 = 'workspace 4 --auto-back-and-forth'
 cmd-5 = 'workspace 5 --auto-back-and-forth'
-cmd-0 = 'workspace 0 --auto-back-and-forth'
+cmd-6 = 'workspace 6 --auto-back-and-forth'
+cmd-7 = 'workspace 7 --auto-back-and-forth'
+cmd-8 = 'workspace 8 --auto-back-and-forth'
+cmd-9 = 'workspace 9 --auto-back-and-forth'
+cmd-0 = 'workspace 10 --auto-back-and-forth'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
 cmd-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
 cmd-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
 cmd-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-cmd-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
+cmd-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
+cmd-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
+cmd-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
+cmd-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
+cmd-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
+cmd-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
 cmd-shift-left = 'move-node-to-workspace prev --focus-follows-window'
 cmd-shift-right = 'move-node-to-workspace next --focus-follows-window'
 
