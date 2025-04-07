@@ -110,7 +110,7 @@ outer.bottom = 13
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut
 # (like in i3)
-cmd-shift-t = '''exec-and-forget osascript -e '
+cmd-enter = '''exec-and-forget osascript -e '
 tell application "Ghostty"
     if it is running then
         activate
