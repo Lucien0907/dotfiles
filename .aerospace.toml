@@ -110,7 +110,7 @@ outer.bottom = 13
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # You can uncomment the following lines to open up terminal with alt + enter shortcut
 # (like in i3)
-cmd-enter = '''exec-and-forget osascript -e '
+cmd-shift-t = '''exec-and-forget osascript -e '
 tell application "Ghostty"
     if it is running then
         activate
@@ -184,6 +184,8 @@ cmd-7 = 'workspace 7 --auto-back-and-forth'
 cmd-8 = 'workspace 8 --auto-back-and-forth'
 cmd-9 = 'workspace 9 --auto-back-and-forth'
 cmd-0 = 'workspace 10 --auto-back-and-forth'
+cmd-rightSquareBracket = '''exec-and-forget aerospace workspace "$(cur=$(aerospace list-workspaces --focused); non=$(aerospace list-workspaces --monitor focused --empty no); next=$(echo "$non" | awk -v c="$cur" '$1 > c { print $1; exit }'); echo ${next:-$cur})"'''
+cmd-leftSquareBracket = '''exec-and-forget aerospace workspace "$(cur=$(aerospace list-workspaces --focused); non=$(aerospace list-workspaces --monitor focused --empty no); prev=$(echo "$non" | awk -v c="$cur" '$1 < c { p=$1 } END { if (p) print p }'); echo ${prev:-$cur})"'''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
