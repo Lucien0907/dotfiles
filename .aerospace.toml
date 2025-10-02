@@ -112,17 +112,16 @@ outer.bottom = 13
 # (like in i3)
 cmd-enter = '''exec-and-forget osascript -e '
 tell application "Ghostty"
-    if it is running then
-        activate
-        tell application "System Events"
-            keystroke "n" using {command down}
+    if it is running
+        tell application "System Events" to tell process "Ghostty"
+            click menu item "New Window" of menu "File" of menu bar 1
         end tell
     else
         activate
     end if
 end tell'
 '''
-#
+
 cmd-shift-g = '''exec-and-forget osascript -e '
 tell application "Google Chrome"
     if it is running then
@@ -130,19 +129,6 @@ tell application "Google Chrome"
     else
         activate
     end if
-end tell'
-'''
-
-cmd-shift-m = '''exec-and-forget osascript -e '
-tell application "Mail"
-    activate
-end tell'
-'''
-
-cmd-shift-f = '''exec-and-forget osascript -e '
-tell application "Finder" 
-    open ("/Users/tao-wei/" as POSIX file)
-    activate
 end tell'
 '''
 
@@ -184,22 +170,24 @@ cmd-7 = 'workspace 7 --auto-back-and-forth'
 cmd-8 = 'workspace 8 --auto-back-and-forth'
 cmd-9 = 'workspace 9 --auto-back-and-forth'
 cmd-0 = 'workspace 10 --auto-back-and-forth'
+
+# move to next/prev active workspace
 cmd-rightSquareBracket = '''exec-and-forget aerospace workspace "$(cur=$(aerospace list-workspaces --focused); non=$(aerospace list-workspaces --monitor focused --empty no); next=$(echo "$non" | awk -v c="$cur" '$1 > c { print $1; exit }'); echo ${next:-$cur})"'''
 cmd-leftSquareBracket = '''exec-and-forget aerospace workspace "$(cur=$(aerospace list-workspaces --focused); non=$(aerospace list-workspaces --monitor focused --empty no); prev=$(echo "$non" | awk -v c="$cur" '$1 < c { p=$1 } END { if (p) print p }'); echo ${prev:-$cur})"'''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-cmd-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
-cmd-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
-cmd-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
-cmd-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-cmd-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
-cmd-shift-6 = 'move-node-to-workspace 6 --focus-follows-window'
-cmd-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
-cmd-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
-cmd-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
-cmd-shift-0 = 'move-node-to-workspace 10 --focus-follows-window'
-cmd-shift-left = 'move-node-to-workspace prev --focus-follows-window'
-cmd-shift-right = 'move-node-to-workspace next --focus-follows-window'
+cmd-shift-1 = 'move-node-to-workspace 1'
+cmd-shift-2 = 'move-node-to-workspace 2'
+cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
+cmd-shift-7 = 'move-node-to-workspace 7'
+cmd-shift-8 = 'move-node-to-workspace 8'
+cmd-shift-9 = 'move-node-to-workspace 9'
+cmd-shift-0 = 'move-node-to-workspace 10'
+cmd-shift-left = 'move-node-to-workspace prev'
+cmd-shift-right = 'move-node-to-workspace next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 cmd-tab = 'workspace-back-and-forth'
@@ -207,7 +195,7 @@ cmd-tab = 'workspace-back-and-forth'
 cmd-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 cmd-shift-space = ['layout floating tiling'] # T
-cmd-f = ['fullscreen']                       # T
+cmd-shift-equal = ['fullscreen']             # T
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 cmd-esc = 'mode service'
@@ -217,6 +205,7 @@ cmd-esc = 'mode service'
 [mode.service.binding]
 esc = 'mode main'
 r = ['reload-config', 'mode main']
+f = ['fullscreen', 'mode main']
 # f = ['flatten-workspace-tree', 'mode main']                # reset layout
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
@@ -229,8 +218,16 @@ cmd-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = 'move-node-to-workspace 5 --focus-follows-window'
+run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace 4 --focus-follows-window'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.AppStore'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.tencent.xinWeChat'
+run = 'layout floating'
